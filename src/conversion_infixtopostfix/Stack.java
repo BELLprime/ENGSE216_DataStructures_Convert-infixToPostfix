@@ -3,18 +3,15 @@ import java.util.EmptyStackException;
 
 public class Stack {
     private Node top,temp;
-    private int count;
 
     public Stack() {
         this.top=null;
-        this.count=0;
     }
     //push
     public void push(char item) {
         Node nn=new Node(item);
         nn.link=top;      
         top=nn;
-        count++;
     }
     //pop
     public char pop() {
@@ -22,7 +19,6 @@ public class Stack {
             temp=top;
             top=top.link;
             temp.link=null;
-            count--;
             return temp.info;
         }
         throw new EmptyStackException();
@@ -30,16 +26,15 @@ public class Stack {
     //chcek
     public boolean isEmpty() {return top==null;} 
     //show
-    public void showAll() {
-        System.out.print("Stack: ");
-        showReverse(top);
-        System.out.println("<--TOP");
+    public String getContents() {
+    String result = "";
+    Node travel = top;
+    while (travel != null) {
+        result += travel.info + " ";
+        travel = travel.link;
     }
-    public void showReverse(Node node) {
-        if (node==null) {return;}
-        showReverse(node.link);//recursion
-        System.out.print(node.info+" ");
-    }
+    return result.trim();
+}
     //peek
     public char peek() {
         if (top==null) throw new EmptyStackException();

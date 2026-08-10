@@ -7,7 +7,6 @@ package conversion_infixtopostfix;
  *
  * @author Natthakit
  */
-import java.util.EmptyStackException;
 import java.util.Scanner;
 
 public class Main {
@@ -16,20 +15,14 @@ public class Main {
 
         System.out.print("Enter an infix expression: ");
         String infix = scanner.nextLine();
-        infix = infix.replace(" ", "")
-                 .replace("**", "^")
-                 .replace("×", "*")
-                 .replace("÷", "/");
-
-        InfixToPostfix conversion = new InfixToPostfix(infix);
         try {
+            InfixToPostfix conversion = new InfixToPostfix(infix);
             conversion.convert();
-            System.out.println(conversion.getPostfix());
-        } catch (EmptyStackException e) {
-            System.out.println(e.getMessage());
-        }
-
-        scanner.close();
+            System.out.println("-".repeat(40));
+            System.out.println("Postfix: "+conversion.getPostfix());
+        } 
+        catch (IllegalArgumentException e) {System.out.println(e.getMessage());}
+        catch (Exception e) {System.out.println("Some thing went wrong.");}
+        finally {scanner.close();}
     }
 }
-
