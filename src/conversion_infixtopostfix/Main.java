@@ -8,7 +8,7 @@ package conversion_infixtopostfix;
  *
  * @author Natthakit
  */
-public class Conversion_InfixToPostfix {
+public class Main {
 
     /**
      * @param args the command line arguments
