@@ -1,0 +1,14 @@
+# NetBeans project files
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+
+# Build output
+/build/
+
+# Java compiled files
+*.class
+
+# JAR files
+*.jar
