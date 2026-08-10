@@ -10,7 +10,7 @@ public class Stack {
         this.count=0;
     }
     //push
-    public void push(String item) {
+    public void push(char item) {
         Node nn =new Node(item);
         if (isEmpty()) {head=top=nn;}
         else {
@@ -20,7 +20,7 @@ public class Stack {
         count++;
     }
     //pop
-    public String pop() {
+    public char pop() {
         if(!isEmpty()) {
             temp=top;  
             if (top.link==null) {
@@ -46,5 +46,10 @@ public class Stack {
         if (node==null) {return;}
         showReverse(node.link);//recursion
         System.out.print(node.info+" ");
+    }
+    //peek
+    public char peek() {
+        if (top==null) throw new EmptyStackException();
+        return top.info;
     }
 }

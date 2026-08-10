@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package conversion_infixtopostfix;
-
-/**
- *
- * @author Natthakit
- */
 public class Node {
+    char info;
+    Node link;
     
+    public Node(char item) {
+        this.info=item;
+        this.link=null;
+    }
 }
