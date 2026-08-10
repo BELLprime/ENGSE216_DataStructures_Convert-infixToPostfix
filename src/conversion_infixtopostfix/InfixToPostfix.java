@@ -2,12 +2,23 @@ package conversion_infixtopostfix;
 public class InfixToPostfix {
     private Stack stack=new Stack();
     private String infix,postfix="";
-
+    //constructor wtih handle
     public InfixToPostfix (String infix) {
-        this.infix = infix+'\0';//add null
+        if (infix==null || infix.isEmpty()) 
+            throw new IllegalArgumentException("Imput can't be empty!!!");
+        
+        this.infix = infix.replace(" ", "")
+        .replace("**", "^")
+        .replace("×", "*")
+        .replace("÷", "/")+'\0';//add null
+
+        if(isAlpha(infix)) 
+            throw new IllegalArgumentException("Letters are't allowed!!!");
     }
-    
+
     public void convert() {
+        System.out.printf("%-5s %-10s %-20s %-10s%n", "","Char", "Stack", "Postfix");
+        System.out.println("-".repeat(50));
         for (int i=0;i<infix.length();i++) {
             char ch=infix.charAt(i);
 
@@ -34,12 +45,13 @@ public class InfixToPostfix {
                 while (!stack.isEmpty() && stack.peek() != '(' ) {
                     postfix+=stack.pop();
                 }
-                if (!stack.isEmpty()) stack.pop();
+                if (!stack.isEmpty()) stack.pop();//clear '('
             } else if (ch=='\0') { //condition 5
                 while (!stack.isEmpty()) {
                     postfix+=stack.pop();
                 }
             }
+            System.out.printf("%-5s %-10s %-20s %-15s%n", "",ch=='\0'? "null" : ch, postfix, stack.getContents());
         }
     }
     //check
@@ -58,6 +70,16 @@ public class InfixToPostfix {
             default -> -1;   
         };
     }
+    private boolean isAlpha(String s) {
+        boolean check=false;
+        for (char c : s.toCharArray()) {
+            if (Character.isLetter(c)) {
+                check=true; // Found a letter character
+                break;
+            }
+        }
+        return check;
+    } 
     //get
     public String getPostfix() {return this.postfix;}
 }
