@@ -5,9 +5,10 @@
         <group>
             <file>file:/D:/2569_semester1/ENGSE216_data/Conversion_InfixToPostfix/src/conversion_infixtopostfix/.gitignore</file>
             <file>file:/D:/2569_semester1/ENGSE216_data/Conversion_InfixToPostfix/src/conversion_infixtopostfix/Main.java</file>
-            <file>file:/D:/2569_semester1/ENGSE216_data/Conversion_InfixToPostfix/src/conversion_infixtopostfix/Node.java</file>
-            <file>file:/D:/2569_semester1/ENGSE216_data/Conversion_InfixToPostfix/src/conversion_infixtopostfix/Stack.java</file>
             <file>file:/D:/2569_semester1/ENGSE216_data/Conversion_InfixToPostfix/src/conversion_infixtopostfix/InfixToPostfix.java</file>
+            <file>file:/D:/2569_semester1/ENGSE216_data/Conversion_InfixToPostfix/src/conversion_infixtopostfix/Stack.java</file>
+            <file>file:/D:/2569_semester1/ENGSE216_data/Conversion_InfixToPostfix/src/conversion_infixtopostfix/Node.java</file>
+            <file>file:/D:/2569_semester1/ENGSE216_data/Conversion_InfixToPostfix/src/conversion_infixtopostfix/MainGUI.java</file>
         </group>
     </open-files>
 </project-private>
