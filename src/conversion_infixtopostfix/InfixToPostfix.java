@@ -11,13 +11,15 @@ public class InfixToPostfix {
         .replace("**", "^")
         .replace("×", "*")
         .replace("÷", "/")+'\0';//add null
-
+        
         if(isAlpha(infix)) 
             throw new IllegalArgumentException("Letters are't allowed!!!");
+        if(missParen(infix))
+            throw new IllegalArgumentException("Parenthesis is unbalance!!!");
     }
 
     public void convert() {
-        System.out.printf("%-5s %-10s %-20s %-10s%n", "","Char", "Stack", "Postfix");
+        System.out.printf("%-5s %-10s %-20s %-10s%n", "","Char","Postfix","Stack");
         System.out.println("-".repeat(50));
         for (int i=0;i<infix.length();i++) {
             char ch=infix.charAt(i);
@@ -74,12 +76,26 @@ public class InfixToPostfix {
         boolean check=false;
         for (char c : s.toCharArray()) {
             if (Character.isLetter(c)) {
-                check=true; // Found a letter character
+                check=true; 
                 break;
             }
         }
         return check;
-    } 
+    }
+    private boolean missParen(String s) { //is String have unbalance parenthesis?
+        boolean check=false;
+        int count=0;
+            for (int i=0;i<s.length();i++){
+            char c=s.charAt(i);
+            if (isOpenParen(c)) count++;
+            else if(isCloseParen(c)) {
+                count--;
+                if (count<0) check=true;//in case )2*2(
+            }
+        }
+        if (count<0||count>0) check=true; 
+        return check;
+    }
     //get
     public String getPostfix() {return this.postfix;}
 }
