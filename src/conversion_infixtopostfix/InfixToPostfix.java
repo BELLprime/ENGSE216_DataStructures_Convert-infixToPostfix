@@ -8,25 +8,23 @@ public class InfixToPostfix {
             throw new IllegalArgumentException("Imput can't be empty!!!");
         
         this.infix = infix.replace(" ", "")
-        .replace("**", "^")
-        .replace("×", "*")
-        .replace("÷", "/")+'\0';//add null
-
-        if(isAlpha(infix)) 
+            .replace("**", "^")
+            .replace("×", "*")
+            .replace("÷", "/")+'\0';//add null
+        this.infix=negativeNum(this.infix);
+        if(isAlpha(this.infix)) 
             throw new IllegalArgumentException("Letters are't allowed!!!");
-        if(missParen(infix))
+        if(missParen(this.infix))
             throw new IllegalArgumentException("Parenthesis is not balance!!!");
-        if(duplicateOperator(infix)) 
+        if(duplicateOperator(this.infix)) 
             throw new IllegalArgumentException("There are duplicate operators!!!");
-        
     }
     public void convert() {
-        System.out.printf("%-1s %-6s %-1s %-30s %-1s %-15s %-1s%n", "|","Char", "|","Postfix", "|","Stack","|");
+        System.out.printf("%-10s %-25s %-10s%n", "Char", "Postfix", "Stack");
         System.out.println("-".repeat(60));
         for (int i=0;i<infix.length();i++) {
             char ch=infix.charAt(i);
             boolean LastOperand = (i+1 >= infix.length()) || !isOperand(infix.charAt(i + 1));
-
             if (isOperand(ch)) {//condition 1
                 postfix+=ch;
                 if (LastOperand) postfix += " ";
@@ -60,7 +58,7 @@ public class InfixToPostfix {
                     postfix += " ";
                 }
             }
-            System.out.printf("%-1s %-6s %-1s %-30s %-1s %-15s %-1s%n","|", ch=='\0'? "null" : ch,"|", postfix,"|", stack.getContents(),"|");
+            System.out.printf("%-10s %-25s %-15s%n", ch=='\0'? "null" : ch, postfix, stack.getContents());
         }
     }
     //check
@@ -96,19 +94,33 @@ public class InfixToPostfix {
             if (isOpenParen(c)) count++;
             else if (isCloseParen(c)) {
                 count--;
-                if (count<0) return true;//in case  )2*2(
+                if (count < 0) return true;//in case  )2*2(
             }
         }
-        if (count<0||count>0) check=true;
+        if (count<0) check=true;
+        else if(count >0) check=true;
         return check;
     }
     private boolean duplicateOperator(String s) {
-        boolean check=false;
-        for (int i=0;i<s.length()-1;i++) {
-            if (isOperator(s.charAt(i)) && isOperator(s.charAt(i+1))) 
+        for (int i = 0; i < s.length() - 1; i++) {
+            if (isOperator(s.charAt(i)) && isOperator(s.charAt(i+1))) {
+                if (s.charAt(i+1) == '-') continue; 
                 return true;
+            }
         }
-        return check;
+        return false;
+    }
+    private String negativeNum(String s) { //->  -2+4  ->  0-2+4
+        String result="";
+        for (int i=0;i<s.length();i++) {
+            char c=s.charAt(i);
+            if (c=='-') {  //first                  front '('                   front op
+                boolean negativeValue = (i==0)||isOpenParen(s.charAt(i-1))||isOperator(s.charAt(i -1));
+                if (negativeValue) result += '0';
+            }
+            result+=c;
+        }
+        return result;
     }
     //get
     public String getPostfix() {return this.postfix;}

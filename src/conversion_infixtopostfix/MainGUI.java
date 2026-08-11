@@ -111,7 +111,7 @@ public class MainGUI extends javax.swing.JFrame {
         try {
             InfixToPostfix conversion = new InfixToPostfix(infix);
             conversion.convert();
-            System.out.println("-".repeat(50));
+            System.out.println("-".repeat(60));
             System.out.println("Postfix: " + conversion.getPostfix());
         } 
         catch (IllegalArgumentException e) { System.out.println(e.getMessage()); }
