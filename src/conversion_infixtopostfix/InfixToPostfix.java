@@ -12,10 +12,12 @@ public class InfixToPostfix {
         .replace("×", "*")
         .replace("÷", "/")+'\0';//add null
 
-        if(missParen(infix))
-            throw new IllegalArgumentException("Parenthesis is not balance!!!");
         if(isAlpha(infix)) 
             throw new IllegalArgumentException("Letters are't allowed!!!");
+        if(missParen(infix))
+            throw new IllegalArgumentException("Parenthesis is not balance!!!");
+        if(duplicateOperator(infix)) 
+            throw new IllegalArgumentException("There are duplicate operators!!!");
         
     }
     public void convert() {
@@ -81,8 +83,7 @@ public class InfixToPostfix {
         boolean check=false;
         for (char c : s.toCharArray()) {
             if (Character.isLetter(c)) {
-                check=true; // Found a letter character
-                break;
+                return true;
             }
         }
         return check;
@@ -95,10 +96,18 @@ public class InfixToPostfix {
             if (isOpenParen(c)) count++;
             else if (isCloseParen(c)) {
                 count--;
-                if (count<0) check = true;//in case  )2*2(
+                if (count<0) return true;//in case  )2*2(
             }
         }
         if (count<0||count>0) check=true;
+        return check;
+    }
+    private boolean duplicateOperator(String s) {
+        boolean check=false;
+        for (int i=0;i<s.length()-1;i++) {
+            if (isOperator(s.charAt(i)) && isOperator(s.charAt(i+1))) 
+                return true;
+        }
         return check;
     }
     //get
