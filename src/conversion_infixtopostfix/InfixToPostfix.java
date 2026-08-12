@@ -57,7 +57,7 @@ public class InfixToPostfix {
                     postfix+=stack.pop();
                     postfix += " ";
                 }
-            }
+            } else throw new IllegalArgumentException("Something is not Operand or Operator.");
             System.out.printf("%-10s %-25s %-15s%n", ch=='\0'? "null" : ch, postfix, stack.getContents());
         }
     }
